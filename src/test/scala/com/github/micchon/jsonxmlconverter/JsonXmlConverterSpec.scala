@@ -24,22 +24,40 @@ class JsonXmlConverterSpec extends FlatSpec with Matchers {
       </fruits>
 
     val json = Json.parse(
-      """[
-        |  {
-        |    "name":"banana",
-        |    "price":1000,
-        |    "season":true,
-        |    "delicious":true
-        |  },
-        |  {
-        |    "name":"strowberry",
-        |    "price":3000,
-        |    "season":false,
-        |    "delicious":true
-        |  }
-        |]""".stripMargin
+      """
+        |{
+        |   "fruits":{
+        |      "fruit":[
+        |         {
+        |            "name":"banana",
+        |            "price":1000,
+        |            "season":true,
+        |            "delicious":true
+        |         },
+        |         {
+        |            "name":"strowberry",
+        |            "price":3000,
+        |            "season":false,
+        |            "delicious":true
+        |         }
+        |      ]
+        |   }
+        |}
+      """.stripMargin
     )
 
-   toJson(xml) should equal(json)
+    toJson(xml) should equal(json)
+  }
+
+  it should "convert the xml its child size is zero" in {
+    val xml =
+      <zero></zero>
+
+    val json = Json.parse(
+      """
+        |{"zero" : ""}
+      """.stripMargin)
+
+    toJson(xml) should equal(json)
   }
 }
