@@ -27,15 +27,15 @@ class JsonXmlConverterSpec extends FlatSpec with Matchers {
       """[
         |  {
         |    "name":"banana",
-        |    "price":"1000",
-        |    "season":"true",
-        |    "delicious":"true"
+        |    "price":1000,
+        |    "season":true,
+        |    "delicious":true
         |  },
         |  {
         |    "name":"strowberry",
-        |    "price":"3000",
-        |    "season":"false",
-        |    "delicions":"true"
+        |    "price":3000,
+        |    "season":false,
+        |    "delicions":true
         |  }
         |]""".stripMargin
     )

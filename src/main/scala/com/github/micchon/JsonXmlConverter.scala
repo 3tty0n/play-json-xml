@@ -1,6 +1,7 @@
 package com.github.micchon
 
 import scala.xml._
+import scala.util.{Try, Success, Failure}
 import play.api.libs.json._
 
 object JsonXmlConverter {
@@ -12,11 +13,18 @@ object JsonXmlConverter {
 
   private def toJsonXmlChildren(node: Node): JsValue =
     if (node.child.size == 1) {
-      JsString(node.text)
+      Try(node.text.toInt) match {
+        case Success(v) => JsNumber(v)
+        case Failure(_) => Try(node.text.toBoolean) match {
+          case Success(v) =>
+            JsBoolean(v)
+          case Failure(_) =>
+            JsString(node.text)
+        }
+      }
     } else {
       JsObject(node.child.collect {
-        case e: Elem if e.nonEmpty =>
-          e.label -> toJsonXmlChildren(e)
+        case e: Elem => e.label -> toJsonXmlChildren(e)
       })
     }
 }
