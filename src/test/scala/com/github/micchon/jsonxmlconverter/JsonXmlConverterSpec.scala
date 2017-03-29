@@ -1,6 +1,6 @@
-package com.github.micchon
+package com.github.micchon.jsonxmlconverter
 
-import com.github.micchon.JsonXmlConverter._
+import JsonXmlConverter._
 import org.scalatest._
 import play.api.libs.json._
 
@@ -19,7 +19,7 @@ class JsonXmlConverterSpec extends FlatSpec with Matchers {
           <name>strowberry</name>
           <price>3000</price>
           <season>false</season>
-          <delicions>true</delicions>
+          <delicious>true</delicious>
         </fruit>
       </fruits>
 
@@ -35,7 +35,7 @@ class JsonXmlConverterSpec extends FlatSpec with Matchers {
         |    "name":"strowberry",
         |    "price":3000,
         |    "season":false,
-        |    "delicions":true
+        |    "delicious":true
         |  }
         |]""".stripMargin
     )

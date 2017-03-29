@@ -1,8 +1,9 @@
-package com.github.micchon
+package com.github.micchon.jsonxmlconverter
 
-import scala.xml._
-import scala.util.{Try, Success, Failure}
 import play.api.libs.json._
+
+import scala.util.{Failure, Success, Try}
+import scala.xml._
 
 object JsonXmlConverter {
   def toJson(node: Node): JsValue = {
