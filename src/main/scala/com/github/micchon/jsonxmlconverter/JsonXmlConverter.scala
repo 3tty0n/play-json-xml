@@ -17,10 +17,8 @@ object JsonXmlConverter {
       Try(node.text.toInt) match {
         case Success(v) => JsNumber(v)
         case Failure(_) => Try(node.text.toBoolean) match {
-          case Success(v) =>
-            JsBoolean(v)
-          case Failure(_) =>
-            JsString(node.text)
+          case Success(v) => JsBoolean(v)
+          case Failure(_) => JsString(node.text)
         }
       }
     } else {
