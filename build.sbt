@@ -3,7 +3,7 @@ lazy val root = (project in file(".")).
     inThisBuild(List(
       organization := "com.github.3tty0n",
       scalaVersion := "2.12.1",
-      crossScalaVersions := Seq("2.12.1", "2.11.9", "2.10.6"),
+      crossScalaVersions := Seq("2.12.1", "2.11.8", "2.10.6"),
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "json-xml-converter",
