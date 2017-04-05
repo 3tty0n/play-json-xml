@@ -1,11 +1,11 @@
-package com.github.micchon.jsonxmlconverter
+package com.github.micchon.playjsonxml
 
 import play.api.libs.json._
 
 import scala.util.{Failure, Success, Try}
 import scala.xml._
 
-object JsonXmlConverter {
+object PlayJsonXml {
   def toJson(xml: NodeSeq): JsValue = {
 
     def isEmpty(node: Node): Boolean = node.child.isEmpty
@@ -35,13 +35,13 @@ object JsonXmlConverter {
     case class XArray(elems: List[XElem]) extends XElem
 
     def toJsValue(x: XElem): JsValue = x match {
-      case x @ XValue(v) => xValueToJsValue(x)
+      case x @ XValue(_) => xValueToJsValue(x)
       case XLeaf((name, value), attrs) => (value, attrs) match {
         case (_, Nil) => toJsValue(value)
-        case (XValue(""), xs) => JsObject(xs.map { case (t1, t2) => t1 -> xValueToJsValue(t2) })
+        case (XValue(""), xs) => JsObject(mkFields(xs))
         case (_, _) => JsObject(Seq(name -> toJsValue(value)))
       }
-      case XNode(xs) => JsObject(xs.map { case (t1, t2) => t1 -> toJsValue(t2)})
+      case XNode(xs) => JsObject(mkFields(xs))
       case XArray(elems) => JsArray(elems.map(toJsValue))
     }
 
@@ -53,11 +53,10 @@ object JsonXmlConverter {
       }
     }
 
-
-    def mkFields(xs: List[(String, XElem)]) =
+    def mkFields(xs: List[(String, XElem)]): List[(String, JsValue)] =
       xs.flatMap { case (name, value) => (value, toJsValue(value)) match {
         case (XLeaf(_, _ :: _), o: JsObject) => o.fields
-        case (_, json) => JsObject(Seq(name -> json)) :: Nil
+        case (_, json) => Seq(name -> json)
       }}
 
     def buildNodes(xml: NodeSeq): List[XElem] = xml match {

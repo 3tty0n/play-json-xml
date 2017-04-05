@@ -1,10 +1,10 @@
-package com.github.micchon.jsonxmlconverter
+package com.github.micchon.playjsonxml
 
-import JsonXmlConverter._
+import PlayJsonXml._
 import org.scalatest._
 import play.api.libs.json._
 
-class JsonXmlConverterSpec extends FlatSpec with Matchers {
+class PlayJsonXmlSpec extends FlatSpec with Matchers {
 
   "toXml" should "convert xml to json" in {
     val xml =
@@ -57,6 +57,11 @@ class JsonXmlConverterSpec extends FlatSpec with Matchers {
       """
         |{"zero" : ""}
       """.stripMargin)
+
+    val xml2 =
+      <number id ="1">3</number>
+
+    println(toJson(xml2))
 
     toJson(xml) should equal(json)
   }
