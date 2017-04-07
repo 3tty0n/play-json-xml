@@ -29,11 +29,7 @@ val json = JsObject(Seq(
 ))
 
 toJson(xml) // => json
-```
 
-If you want to convert xml to play-json implicitly,
-
-```scala
 import com.github.micchon.playjsonxml.implicits._
 
 xml.toJson // => json
