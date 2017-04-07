@@ -1,6 +1,7 @@
 package com.github.micchon.playjsonxml
 
-import PlayJsonXml._
+import JsonConverter.toXml
+import XmlConverter.toJson
 import org.scalatest._
 import play.api.libs.json._
 import scala.xml.{Elem, NodeSeq}

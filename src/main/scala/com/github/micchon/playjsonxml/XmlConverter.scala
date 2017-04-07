@@ -5,7 +5,7 @@ import play.api.libs.json._
 import scala.util.{Failure, Success, Try}
 import scala.xml._
 
-object PlayJsonXml {
+object XmlConverter {
   def toJson(xml: NodeSeq): JsValue = {
 
     def isEmpty(node: Node): Boolean = node.child.isEmpty
@@ -35,7 +35,7 @@ object PlayJsonXml {
     case class XArray(elems: List[XElem]) extends XElem
 
     def toJsValue(x: XElem): JsValue = x match {
-      case x @ XValue(_) => xValueToJsValue(x)
+      case x@XValue(_) => xValueToJsValue(x)
       case XLeaf((name, value), attrs) => (value, attrs) match {
         case (_, Nil) => toJsValue(value)
         case (XValue(""), xs) => JsObject(mkFields(xs))
@@ -57,7 +57,8 @@ object PlayJsonXml {
       xs.flatMap { case (name, value) => (value, toJsValue(value)) match {
         case (XLeaf(_, _ :: _), o: JsObject) => o.fields
         case (_, json) => Seq(name -> json)
-      }}
+      }
+      }
 
     def buildNodes(xml: NodeSeq): List[XElem] = xml match {
       case n: Node =>
@@ -79,42 +80,10 @@ object PlayJsonXml {
     }
 
     buildNodes(xml) match {
-      case List(x @ XLeaf(_, _ :: _)) => toJsValue(x)
-      case List(x) => Json.obj(nameOf(xml.head) -> toJsValue(x))
+      case List(x@XLeaf(_, _ :: _)) => toJsValue(x)
+      case List(x) => play.api.libs.json.Json.obj(nameOf(xml.head) -> toJsValue(x))
       case x => JsArray(x.map(toJsValue))
     }
 
   }
-
-  def toXml(json: JsValue): NodeSeq = {
-    def toXml(name: String, json: JsValue): NodeSeq = json match {
-      case JsObject(fields) =>
-        val children = fields.toList.flatMap { case (n, v) => toXml(n, v) }
-        new XmlNode(name, children)
-      case JsArray(xs) =>
-        xs.flatMap { v => toXml(name, v) }
-      case JsNumber(v) =>
-        new XmlElem(name, v.toString())
-      case JsBoolean(v) =>
-        new XmlElem(name, v.toString)
-      case JsString(v) =>
-        new XmlElem(name, v)
-      case JsNull =>
-        new XmlElem(name, "null")
-    }
-
-    json match {
-      case JsObject(fields) =>
-        fields.toList.flatMap { case (n, v) => toXml(n, v) }
-      case x =>
-        toXml("root", x)
-    }
-  }
-
-  private class XmlNode(name: String, children: Seq[Node])
-    extends Elem(null, name, xml.Null, TopScope, true, children :_*)
-
-  private class XmlElem(name: String, value: String)
-    extends Elem(null, name, xml.Null, TopScope, true, Text(value))
-
 }
