@@ -1,8 +1,9 @@
 package com.github.micchon.playjsonxml.implicits
 
-import PlayJsonXmlImplicits.RichPlayJson
+import PlayJsonXmlImplicits._
 import org.scalatest.{FlatSpec, Matchers}
 import play.api.libs.json.Json
+import scala.xml.NodeSeq
 
 class PlayJsonXmlImplicitsSpec extends FlatSpec with Matchers {
 
@@ -22,6 +23,11 @@ class PlayJsonXmlImplicitsSpec extends FlatSpec with Matchers {
           <delicious>true</delicious>
         </fruit>
       </fruits>
+
+    val xmlNodeSeq: NodeSeq =
+      <fruits><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name>strowberry</name><price>3000</price><season>false</season><delicious>true</delicious></fruit></fruits>
+        .foldLeft(NodeSeq.Empty){ (a, b) => a ++ b }
+
 
     val json = Json.parse(
       """
@@ -49,5 +55,9 @@ class PlayJsonXmlImplicitsSpec extends FlatSpec with Matchers {
 
   "xml.toJson" should "convert xml to play-json implicitly" in new SetUp {
     xml.toJson should equal(json)
+  }
+
+  "json.toXml" should "convert play-json to xml implicitly" in new SetUp {
+    json.toXml should equal(xmlNodeSeq)
   }
 }
