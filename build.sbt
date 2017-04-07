@@ -1,12 +1,16 @@
+lazy val Scala212 = "2.12.1"
+lazy val Scala211 = "2.11.8"
+lazy val Scala210 = "2.10.6"
+
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
-      organization := "com.github.3tty0n",
-      scalaVersion := "2.12.1",
-      crossScalaVersions := Seq("2.12.1", "2.11.8", "2.10.6"),
-      version      := "0.1.0-SNAPSHOT"
+      name                := "play-json-xml",
+      organization        := "com.github.3tty0n",
+      scalaVersion        := Scala212,
+      crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
+      version             := "0.1.0-SNAPSHOT"
     )),
-    name := "json-xml-converter",
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "3.0.1",
       "org.scala-lang.modules" %% "scala-xml" % "1.0.6"
