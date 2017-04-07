@@ -11,4 +11,10 @@ object PlayJsonXmlImplicits {
       PlayJsonXml.toJson(xml)
     }
   }
+
+  implicit class RichXml(val json: JsValue) {
+    def toXml: NodeSeq = {
+      PlayJsonXml.toXml(json)
+    }
+  }
 }
