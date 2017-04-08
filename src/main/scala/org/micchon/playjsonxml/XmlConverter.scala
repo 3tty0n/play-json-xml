@@ -1,4 +1,4 @@
-package com.github.micchon.playjsonxml
+package org.micchon.playjsonxml
 
 import play.api.libs.json._
 
@@ -57,8 +57,7 @@ object XmlConverter {
       xs.flatMap { case (name, value) => (value, toJsValue(value)) match {
         case (XLeaf(_, _ :: _), o: JsObject) => o.fields
         case (_, json) => Seq(name -> json)
-      }
-      }
+      }}
 
     def buildNodes(xml: NodeSeq): List[XElem] = xml match {
       case n: Node =>

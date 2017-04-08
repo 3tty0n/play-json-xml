@@ -1,18 +1,17 @@
-package com.github.micchon.playjsonxml
+package org.micchon.playjsonxml.implicits
 
-import JsonConverter.toXml
-import XmlConverter.toJson
-import org.scalatest._
-import play.api.libs.json._
-import scala.xml.{Elem, NodeSeq}
+import PlayJsonXmlImplicits._
+import org.scalatest.{FlatSpec, Matchers}
+import play.api.libs.json.Json
+import scala.xml.NodeSeq
 
-class PlayJsonXmlSpec extends FlatSpec with Matchers {
+class PlayJsonXmlImplicitsSpec extends FlatSpec with Matchers {
 
   trait SetUp {
     val xml =
       <fruits>
         <fruit>
-         <name>banana</name>
+          <name>banana</name>
           <price>1000</price>
           <season>true</season>
           <delicious>true</delicious>
@@ -27,7 +26,8 @@ class PlayJsonXmlSpec extends FlatSpec with Matchers {
 
     val xmlNodeSeq: NodeSeq =
       <fruits><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name>strowberry</name><price>3000</price><season>false</season><delicious>true</delicious></fruit></fruits>
-      .foldLeft(NodeSeq.Empty){ (a, b) => a ++ b }
+        .foldLeft(NodeSeq.Empty){ (a, b) => a ++ b }
+
 
     val json = Json.parse(
       """
@@ -51,26 +51,13 @@ class PlayJsonXmlSpec extends FlatSpec with Matchers {
         |}
       """.stripMargin
     )
-
-    val xml2 =
-      <zero></zero>
-
-    val json2 = Json.parse(
-      """
-        |{"zero" : ""}
-      """.stripMargin)
-
   }
 
-  "toJson" should "convert xml to json" in new SetUp {
-    toJson(xml) should equal(json)
+  "xml.toJson" should "convert xml to play-json implicitly" in new SetUp {
+    xml.toJson should equal(json)
   }
 
-  it should "convert the xml its child size is zero" in new SetUp {
-    toJson(xml2) should equal(json2)
-  }
-
-  "toXml" should "convert json to xml" in new SetUp {
-    toXml(json) should equal(xmlNodeSeq)
+  "json.toXml" should "convert play-json to xml implicitly" in new SetUp {
+    json.toXml should equal(xmlNodeSeq)
   }
 }

@@ -6,7 +6,7 @@ lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       name                := "play-json-xml",
-      organization        := "com.github.3tty0n",
+      organization        := "org.micchon",
       scalaVersion        := Scala212,
       crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
       version             := "0.1.0-SNAPSHOT"

@@ -1,4 +1,4 @@
-package com.github.micchon.playjsonxml
+package org.micchon.playjsonxml
 
 import play.api.libs.json._
 import scala.xml._

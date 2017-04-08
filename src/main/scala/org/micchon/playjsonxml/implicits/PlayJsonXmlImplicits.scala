@@ -1,8 +1,8 @@
-package com.github.micchon.playjsonxml.implicits
+package org.micchon.playjsonxml.implicits
 
 import com.github.micchon.playjsonxml._
+import org.micchon.playjsonxml.{JsonConverter, XmlConverter}
 import play.api.libs.json._
-
 import scala.xml._
 
 object PlayJsonXmlImplicits {
