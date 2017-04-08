@@ -5,8 +5,11 @@ It converts between play-json and xml.
 
 ## Useage
 
+If you want to convert xml to json,
+
 ```scala
 import org.micchon.playjsonxml.XmlConverter.toJson
+import org.micchon.playjsonxml.implicits._
 import play.api.libs.json._
 
 import scala.xml._
@@ -21,16 +24,44 @@ val xml =
     </dol>
   </money>
 
-val json = JsObject(Seq(
-  "money" -> JsObject(Seq(
-    "yen" -> JsObject(Seq("price" -> JsNumber(100))),
-    "dol" -> JsObject(Seq("price" -> JsNumber(110)))
+toJson(xml) == // or xml.toJson
+  JsObject(Seq(
+    "money" -> JsObject(Seq(
+      "yen" -> JsObject(Seq("price" -> JsNumber(100))),
+      "dol" -> JsObject(Seq("price" -> JsNumber(110)))
+    ))
   ))
-))
+```
 
-toJson(xml) // => json
+Or, if you want to convert json to xml,
 
+```scala
+import org.micchon.playjsonxml.JsonConverter.toXml
 import org.micchon.playjsonxml.implicits._
+import play.api.libs.json._
 
-xml.toJson // => json
+val json = Json.parse(
+  """
+    |{
+    |   "fruits":{
+    |      "fruit":[
+    |         {
+    |            "name":"banana",
+    |            "price":1000,
+    |            "season":true,
+    |            "delicious":true
+    |         },
+    |         {
+    |            "name":"strowberry",
+    |            "price":3000,
+    |            "season":false,
+    |            "delicious":true
+    |         }
+    |      ]
+    |   }
+    |}
+  """.stripMargin)
+  
+toXml(json) == // or json.toXml
+  <fruits><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name>strowberry</name><price>3000</price><season>false</season><delicious>true</delicious></fruit></fruits>
 ```
