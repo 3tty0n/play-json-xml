@@ -1,10 +1,9 @@
-package org.micchon.playjsonxml.implicits
+package org.micchon.playjsonxml
 
-import org.micchon.playjsonxml.{JsonConverter, XmlConverter}
-import play.api.libs.json._
-import scala.xml._
+import play.api.libs.json.JsValue
+import scala.xml.NodeSeq
 
-object PlayJsonXmlImplicits {
+object Implicits {
   implicit class RichPlayJson(val xml: NodeSeq) {
     def toJson: JsValue = {
       XmlConverter.toJson(xml)

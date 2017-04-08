@@ -1,10 +1,11 @@
 package org.micchon.playjsonxml
 
-import JsonConverter.toXml
-import XmlConverter.toJson
+import org.micchon.playjsonxml.JsonConverter.toXml
+import org.micchon.playjsonxml.XmlConverter.toJson
+import org.micchon.playjsonxml.Implicits._
 import org.scalatest._
 import play.api.libs.json._
-import scala.xml.{Elem, NodeSeq}
+import scala.xml.NodeSeq
 
 class PlayJsonXmlSpec extends FlatSpec with Matchers {
 
@@ -52,25 +53,21 @@ class PlayJsonXmlSpec extends FlatSpec with Matchers {
       """.stripMargin
     )
 
-    val xml2 =
-      <zero></zero>
-
-    val json2 = Json.parse(
-      """
-        |{"zero" : ""}
-      """.stripMargin)
-
   }
 
   "toJson" should "convert xml to json" in new SetUp {
     toJson(xml) should equal(json)
   }
 
-  it should "convert the xml its child size is zero" in new SetUp {
-    toJson(xml2) should equal(json2)
+  "xml.toJson" should "convert xml to json implicitly" in new SetUp {
+    xml.toJson should equal(json)
   }
 
   "toXml" should "convert json to xml" in new SetUp {
     toXml(json) should equal(xmlNodeSeq)
+  }
+
+  "json.toXml" should "convert json to xml implicitly" in new SetUp {
+    json.toXml should equal(xmlNodeSeq)
   }
 }

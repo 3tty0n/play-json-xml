@@ -9,7 +9,7 @@ If you want to convert xml to json,
 
 ```scala
 import org.micchon.playjsonxml.XmlConverter.toJson
-import org.micchon.playjsonxml.implicits._
+import org.micchon.playjsonxml.Implicits._
 import play.api.libs.json._
 
 import scala.xml._
