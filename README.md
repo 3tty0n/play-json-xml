@@ -6,7 +6,7 @@ It converts between play-json and xml.
 ## Useage
 
 ```scala
-import com.github.micchon.playjsonxml.XmlConverter.toJson
+import org.micchon.playjsonxml.XmlConverter.toJson
 import play.api.libs.json._
 
 import scala.xml._
@@ -30,7 +30,7 @@ val json = JsObject(Seq(
 
 toJson(xml) // => json
 
-import com.github.micchon.playjsonxml.implicits._
+import org.micchon.playjsonxml.implicits._
 
 xml.toJson // => json
 ```
