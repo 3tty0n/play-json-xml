@@ -37,7 +37,7 @@ Or, if you want to convert json to xml,
 
 ```scala
 import org.micchon.playjsonxml.JsonConverter.toXml
-import org.micchon.playjsonxml.implicits._
+import org.micchon.playjsonxml.Implicits._
 import play.api.libs.json._
 
 val json = Json.parse(
