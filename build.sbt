@@ -4,24 +4,23 @@ lazy val Scala210 = "2.10.6"
 
 lazy val root = (project in file(".")).
   settings(
-    inThisBuild(List(
-      name                := "play-json-xml",
-      organization        := "org.micchon",
-      scalaVersion        := Scala212,
-      crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
-      version             := "0.1.0-SNAPSHOT"
-    )),
+    name                := "play-json-xml",
+    organization        := "org.micchon",
+    scalaVersion        := Scala212,
+    crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
+    version             := "0.1.0-SNAPSHOT",
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "3.0.1",
-      "org.scala-lang.modules" %% "scala-xml" % "1.0.6"
+      "org.scalatest" %% "scalatest" % "3.0.1"
     ) ++ (
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, scalaMajor)) if scalaMajor >= 12 =>
-          "com.typesafe.play" %% "play-json" % "2.6.0-M6" :: Nil
-        case Some((2, scalaMajor)) if scalaMajor == 11 =>
-          "com.typesafe.play" %% "play-json" % "2.5.13" :: Nil
+          Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.6",
+              "com.typesafe.play" %% "play-json" % "2.6.0-M6")
+        case Some((2, scalaMajor)) if scalaMajor >= 11 =>
+          Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.6",
+              "com.typesafe.play" %% "play-json" % "2.5.13")
         case _ =>
-          "com.typesafe.play" %% "play-json" % "2.4.11" :: Nil
+          Seq("com.typesafe.play" %% "play-json" % "2.4.11")
       }
     )
   ).
