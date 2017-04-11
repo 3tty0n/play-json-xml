@@ -51,6 +51,6 @@ lazy val publishSettings = Seq(
       </developers>
       <scm>
         <url>git@github.com:3tty0n/play-json-xml.git</url>
-        <connection>scm:git:git@github.com:your-account/your-project.git</connection>
+        <connection>scm:git:git@github.com:3tty0n/play-json-xml.git</connection>
       </scm>
   )
