@@ -2,6 +2,13 @@
 
 It converts between play-json and xml like json4s.
 
+## Install
+
+Builds are available for Scala 2.10.x, 2.11.x and for 2.12.x. The main line of development of play-json-xml is 2.12.1.
+
+```scala
+libraryDependencies += "org.micchon" %% "play-json-xml" % "0.1.0"
+```
 
 ## Useage
 
