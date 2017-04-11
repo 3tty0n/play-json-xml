@@ -8,7 +8,7 @@ lazy val root = (project in file(".")).
     organization        := "org.micchon",
     scalaVersion        := Scala212,
     crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
-    version             := "0.1.0-SNAPSHOT",
+    version             := "0.1.0",
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "3.0.1"
     ) ++ (
@@ -40,6 +40,12 @@ lazy val publishSettings = Seq(
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },
     licenses := Seq("Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")),
+    scmInfo := Some(
+      ScmInfo(
+        url("https://github.com/3tty0n/play-json-xml"),
+        "scm:git@github.cm:3tty0n/play-json-xml.git"
+      )
+    ),
     pomExtra :=
       <developers>
         <developer>
@@ -48,8 +54,4 @@ lazy val publishSettings = Seq(
           <url>http://micchon.org</url>
         </developer>
       </developers>
-      <scm>
-        <url>git@github.com:3tty0n/play-json-xml.git</url>
-        <connection>scm:git@github.com:3tty0n/play-json-xml.git</connection>
-      </scm>
   )
