@@ -6,13 +6,13 @@ import scala.xml.NodeSeq
 object Implicits {
   implicit class RichPlayJson(val xml: NodeSeq) {
     def toJson: JsValue = {
-      XmlConverter.toJson(xml)
+      Xml.toJson(xml)
     }
   }
 
   implicit class RichXml(val json: JsValue) {
     def toXml: NodeSeq = {
-      JsonConverter.toXml(json)
+      Xml.toXml(json)
     }
   }
 }

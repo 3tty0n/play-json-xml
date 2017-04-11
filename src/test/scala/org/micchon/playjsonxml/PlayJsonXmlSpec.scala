@@ -1,7 +1,7 @@
 package org.micchon.playjsonxml
 
-import org.micchon.playjsonxml.JsonConverter.toXml
-import org.micchon.playjsonxml.XmlConverter.toJson
+import org.micchon.playjsonxml.Xml.toJson
+import org.micchon.playjsonxml.Xml.toXml
 import org.micchon.playjsonxml.Implicits._
 import org.scalatest._
 import play.api.libs.json._

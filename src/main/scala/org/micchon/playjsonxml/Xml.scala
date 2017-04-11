@@ -5,28 +5,22 @@ import play.api.libs.json._
 import scala.util.{Failure, Success, Try}
 import scala.xml._
 
-object XmlConverter {
+object Xml {
   def toJson(xml: NodeSeq): JsValue = {
 
     def isEmpty(node: Node): Boolean = node.child.isEmpty
-
     def isLeaf(node: Node) = {
       def descendant(n: Node): List[Node] = n match {
         case g: Group => g.nodes.toList.flatMap(x => x :: descendant(x))
         case _ => n.child.toList.flatMap { x => x :: descendant(x) }
       }
-
       !descendant(node).exists(_.isInstanceOf[Elem])
     }
 
     def isArray(nodeNames: Seq[String]) = nodeNames.size != 1 && nodeNames.toList.distinct.size == 1
-
     def directChildren(n: Node): NodeSeq = n.child.filter(c => c.isInstanceOf[Elem])
-
     def nameOf(n: Node) = (if (n.prefix ne null) n.prefix + ":" else "") + n.label
-
     def buildAttrs(n: Node) = n.attributes.map((a: MetaData) => (a.key, XValue(a.value.text))).toList
-
 
     sealed abstract class XElem extends Product with Serializable
     case class XValue(value: String) extends XElem
@@ -85,4 +79,35 @@ object XmlConverter {
     }
 
   }
+
+  def toXml(json: JsValue): NodeSeq = {
+    def toXml(name: String, json: JsValue): NodeSeq = json match {
+      case JsObject(fields) =>
+        val children = fields.toList.flatMap { case (n, v) => toXml(n, v) }
+        XmlNode(name, children)
+      case JsArray(xs) =>
+        xs.flatMap { v => toXml(name, v) }
+      case JsNumber(v) =>
+        XmlElem(name, v.toString())
+      case JsBoolean(v) =>
+        XmlElem(name, v.toString)
+      case JsString(v) =>
+        XmlElem(name, v)
+      case JsNull =>
+        XmlElem(name, "null")
+    }
+
+    json match {
+      case JsObject(fields) =>
+        fields.toList.flatMap { case (n, v) => toXml(n, v) }
+      case x =>
+        toXml("root", x)
+    }
+  }
+
+  private[this] case class XmlNode(name: String, children: Seq[Node])
+    extends Elem(null, name, xml.Null, TopScope, true, children: _*)
+
+  private[this] case class XmlElem(name: String, value: String)
+    extends Elem(null, name, xml.Null, TopScope, true, Text(value))
 }
