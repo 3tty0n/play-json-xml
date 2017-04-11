@@ -40,13 +40,8 @@ lazy val publishSettings = Seq(
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },
     licenses := Seq("Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")),
-    scmInfo := Some(
-      ScmInfo(
-        url("https://github.com/3tty0n/play-json-xml"),
-        "scm:git@github.cm:3tty0n/play-json-xml.git"
-      )
-    ),
     pomExtra :=
+      <url>https://github.com/3tty0n/play-json-xml</url>
       <developers>
         <developer>
           <id>3tty0n</id>
@@ -54,4 +49,8 @@ lazy val publishSettings = Seq(
           <url>http://micchon.org</url>
         </developer>
       </developers>
+      <scm>
+        <url>git@github.com:3tty0n/play-json-xml.git</url>
+        <connection>scm:git:git@github.com:your-account/your-project.git</connection>
+      </scm>
   )
