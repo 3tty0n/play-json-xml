@@ -8,7 +8,7 @@ It converts between play-json and xml like json4s.
 If you want to convert xml to json,
 
 ```scala
-import org.micchon.playjsonxml.XmlConverter.toJson
+import org.micchon.playjsonxml.Xml.toJson
 import org.micchon.playjsonxml.Implicits._
 import play.api.libs.json._
 
@@ -36,7 +36,7 @@ toJson(xml) == // or xml.toJson
 Or, if you want to convert json to xml,
 
 ```scala
-import org.micchon.playjsonxml.JsonConverter.toXml
+import org.micchon.playjsonxml.Xml.toXml
 import org.micchon.playjsonxml.Implicits._
 import play.api.libs.json._
 
