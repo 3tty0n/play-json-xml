@@ -10,7 +10,7 @@ lazy val root = (project in file(".")).
     crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
     version             := "0.1.0",
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "3.0.1"
+      "org.scalatest" %% "scalatest" % "3.0.1" % Test
     ) ++ (
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, scalaMajor)) if scalaMajor >= 12 =>
