@@ -24,4 +24,33 @@ lazy val root = (project in file(".")).
           "com.typesafe.play" %% "play-json" % "2.4.11" :: Nil
       }
     )
+  ).
+  settings(
+    publishSettings: _*
+  )
+
+lazy val publishSettings = Seq(
+    publishMavenStyle := true,
+    publishTo := {
+      val nexus = "https://oss.sonatype.org/"
+      if (isSnapshot.value)
+        Some("snapshots" at nexus + "content/repositories/snapshots")
+      else
+        Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    },
+    publishArtifact in Test := false,
+    pomIncludeRepository := { _ => false },
+    licenses := Seq("Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")),
+    pomExtra :=
+      <developers>
+        <developer>
+          <id>3tty0n</id>
+          <name>Yusuke Izawa</name>
+          <url>http://micchon.org</url>
+        </developer>
+      </developers>
+      <scm>
+        <url>git@github.com:3tty0n/play-json-xml.git</url>
+        <connection>scm:git@github.com:3tty0n/play-json-xml.git</connection>
+      </scm>
   )
