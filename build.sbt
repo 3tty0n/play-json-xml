@@ -1,5 +1,5 @@
-lazy val Scala212 = "2.12.1"
-lazy val Scala211 = "2.11.8"
+lazy val Scala212 = "2.12.2"
+lazy val Scala211 = "2.11.11"
 lazy val Scala210 = "2.10.6"
 
 lazy val root = (project in file(".")).
