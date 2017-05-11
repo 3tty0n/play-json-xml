@@ -6,4 +6,5 @@ scala:
   - 2.11.11
   - 2.12.2
 script:
-  - sbt clean test
+  - sbt enableCoursier
+  - sbt test
