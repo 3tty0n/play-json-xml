@@ -9,5 +9,8 @@ scala:
   - 2.10.6
   - 2.11.11
   - 2.12.2
+before_script:
+  - if [ ! -e projec/plugins.sbt ] ; then touch project/plugins.sbt; fi
+  - if [ test $TRAVIS_BRANCH != "master" ] ; then echo "\naddSbtPlugin(\"io.get-coursier\" % \"sbt-coursier\" % \"1.0.0-RC2\")" >> project/plugins.sbt; fi
 script:
-  - sbt test
+  - sbt clean test
