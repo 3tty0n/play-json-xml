@@ -5,8 +5,5 @@ scala:
   - 2.10.6
   - 2.11.11
   - 2.12.2
-before_script:
-  - /home/travis/build/3tty0n/play-json-xml/project/plugins.sbt
-  - echo "\naddSbtPlugin(\"io.get-coursier\" % \"sbt-coursier\" % \"1.0.0-RC2\")" >> /home/travis/build/3tty0n/play-json-xml/project/plugins.sbt
 script:
   - sbt clean test
