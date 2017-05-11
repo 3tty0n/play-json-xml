@@ -28,6 +28,20 @@ lazy val root = (project in file(".")).
     publishSettings: _*
   )
 
+lazy val enableCoursier = taskKey[Seq[File]]("Enable sbt coursier")
+lazy val disableCoursier = taskKey[Unit]("Disable sbt coursier")
+
+enableCoursier := {
+  val file = baseDirectory.value / "project" / "coursier.sbt"
+  IO.write(file, """addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.0.0-RC2")""")
+  Seq(file)
+}
+
+disableCoursier := {
+  val file = baseDirectory.value / "project" / "coursier.sbt"
+  IO.delete(file)
+}
+
 lazy val publishSettings = Seq(
     publishMavenStyle := true,
     publishTo := {
