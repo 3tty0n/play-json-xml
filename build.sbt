@@ -1,4 +1,4 @@
-lazy val Scala212 = "2.12.2"
+lazy val Scala212 = "2.12.3"
 lazy val Scala211 = "2.11.11"
 lazy val Scala210 = "2.10.6"
 
