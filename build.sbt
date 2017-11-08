@@ -16,7 +16,7 @@ lazy val root = (project in file(".")).
         case Some((2, scalaMajor)) if scalaMajor >= 12 =>
           Seq(
             "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-            "com.typesafe.play" %% "play-json" % "2.6.0"
+            "com.typesafe.play" %% "play-json" % "2.6.6"
           )
         case Some((2, scalaMajor)) if scalaMajor >= 11 =>
           Seq(
