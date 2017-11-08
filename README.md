@@ -4,10 +4,10 @@ It converts between play-json and xml like json4s.
 
 ## Install
 
-Builds are available for Scala 2.10.x, 2.11.x and for 2.12.x. The main line of development of play-json-xml is 2.12.2.
+Builds are available for Scala 2.10.x, 2.11.x and for 2.12.x. The main line of development of play-json-xml is 2.12.4.
 
 ```scala
-libraryDependencies += "org.micchon" %% "play-json-xml" % "0.2.1"
+libraryDependencies += "org.micchon" %% "play-json-xml" % "0.3.0"
 ```
 
 ## Useage
@@ -15,8 +15,8 @@ libraryDependencies += "org.micchon" %% "play-json-xml" % "0.2.1"
 If you want to convert xml to json,
 
 ```scala
-import org.micchon.playjsonxml.Xml.toJson
-import org.micchon.playjsonxml.Implicits._
+import play.api.libs.json.Xml.toJson
+import play.api.libs.json.implicits.JsonXmlImplicits._
 import play.api.libs.json._
 
 import scala.xml._
@@ -43,8 +43,8 @@ toJson(xml) == // or xml.toJson
 Or, if you want to convert json to xml,
 
 ```scala
-import org.micchon.playjsonxml.Xml.toXml
-import org.micchon.playjsonxml.Implicits._
+import play.api.libs.json.Xml.toJson
+import play.api.libs.json.implicits.JsonXmlImplicits._
 import play.api.libs.json._
 
 val json = Json.parse(

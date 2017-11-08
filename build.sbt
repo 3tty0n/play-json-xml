@@ -1,4 +1,4 @@
-lazy val Scala212 = "2.12.3"
+lazy val Scala212 = "2.12.4"
 lazy val Scala211 = "2.11.11"
 lazy val Scala210 = "2.10.6"
 
@@ -8,7 +8,7 @@ lazy val root = (project in file(".")).
     organization        := "org.micchon",
     scalaVersion        := Scala212,
     crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
-    version             := "0.2.1",
+    version             := "0.3.0",
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "3.0.3" % Test
     ) ++ (
