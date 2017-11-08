@@ -1,6 +1,4 @@
-package org.micchon.playjsonxml
-
-import play.api.libs.json._
+package play.api.libs.json
 
 import scala.util.{Failure, Success, Try}
 import scala.xml._

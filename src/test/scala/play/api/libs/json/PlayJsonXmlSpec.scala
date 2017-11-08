@@ -1,8 +1,8 @@
-package org.micchon.playjsonxml
+package play.api.libs.json
 
-import org.micchon.playjsonxml.Xml.toJson
-import org.micchon.playjsonxml.Xml.toXml
-import org.micchon.playjsonxml.Implicits._
+import play.api.libs.json.Xml.toJson
+import play.api.libs.json.Xml.toXml
+import play.api.libs.json.implicits.JsonXmlImplicits._
 import org.scalatest._
 import play.api.libs.json._
 import scala.xml.NodeSeq
