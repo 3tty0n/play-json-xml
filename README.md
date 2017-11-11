@@ -1,4 +1,7 @@
-# play-json-xml [![Build Status](https://travis-ci.org/3tty0n/play-json-xml.svg?branch=master)](https://travis-ci.org/3tty0n/play-json-xml)
+# play-json-xml
+
+[![Build Status](https://travis-ci.org/3tty0n/play-json-xml.svg?branch=master)](https://travis-ci.org/3tty0n/play-json-xml) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.micchon/play-json-xml_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.micchon/play-json-xml_2.12)
+
 
 It converts between play-json and xml like json4s.
 
@@ -68,7 +71,7 @@ val json = Json.parse(
     |   }
     |}
   """.stripMargin)
-  
+
 toXml(json) == // or json.toXml
   <fruits><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name>strowberry</name><price>3000</price><season>false</season><delicious>true</delicious></fruit></fruits>
 ```
