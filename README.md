@@ -18,9 +18,9 @@ libraryDependencies += "org.micchon" %% "play-json-xml" % "0.3.0"
 If you want to convert xml to json,
 
 ```scala
-import play.api.libs.json.Xml.toJson
+import play.api.libs.json.Xml
 import play.api.libs.json.implicits.JsonXmlImplicits._
-import play.api.libs.json._
+import play.api.libs.json.Json
 
 import scala.xml._
 
@@ -34,7 +34,7 @@ val xml =
     </dol>
   </money>
 
-toJson(xml) == // or xml.toJson
+Xml.toJson(xml) == // or xml.toJson
   JsObject(Seq(
     "money" -> JsObject(Seq(
       "yen" -> JsObject(Seq("price" -> JsNumber(100))),
@@ -46,9 +46,9 @@ toJson(xml) == // or xml.toJson
 Or, if you want to convert json to xml,
 
 ```scala
-import play.api.libs.json.Xml.toJson
+import play.api.libs.json.Xml
 import play.api.libs.json.implicits.JsonXmlImplicits._
-import play.api.libs.json._
+import play.api.libs.json.Json
 
 val json = Json.parse(
   """
@@ -72,6 +72,6 @@ val json = Json.parse(
     |}
   """.stripMargin)
 
-toXml(json) == // or json.toXml
+Xml.toXml(json) == // or json.toXml
   <fruits><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name>strowberry</name><price>3000</price><season>false</season><delicious>true</delicious></fruit></fruits>
 ```
