@@ -8,21 +8,17 @@ lazy val root = (project in file(".")).
     organization        := "org.micchon",
     scalaVersion        := Scala212,
     crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
-    version             := "0.3.0",
+    version             := "0.3.1",
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "3.0.3" % Test
     ) ++ (
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, scalaMajor)) if scalaMajor >= 12 =>
-          Seq(
-            "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-            "com.typesafe.play" %% "play-json" % "2.6.6"
-          )
+          Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.6",
+              "com.typesafe.play" %% "play-json" % "2.6.7")
         case Some((2, scalaMajor)) if scalaMajor >= 11 =>
-          Seq(
-            "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-            "com.typesafe.play" %% "play-json" % "2.5.13"
-          )
+          Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.6",
+              "com.typesafe.play" %% "play-json" % "2.5.13")
         case _ =>
           Seq("com.typesafe.play" %% "play-json" % "2.4.11")
       }
