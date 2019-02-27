@@ -26,15 +26,22 @@ object Xml {
     case class XNode(fields: List[(String, XElem)]) extends XElem
     case class XArray(elems: List[XElem]) extends XElem
 
-    def toJsValue(x: XElem): JsValue = x match {
+    def toJsValue(x: XElem, flatten: Boolean = false): JsValue = x match {
       case x@XValue(_) => xValueToJsValue(x)
       case XLeaf((name, value), attrs) => (value, attrs) match {
         case (_, Nil) => toJsValue(value)
         case (XValue(""), xs) => JsObject(mkFields(xs))
+        case (XValue(a), _ :: _) =>
+          var values = JsObject(mkFields(("value" → value) +: attrs).toSeq)
+          if (flatten) {
+            values
+          } else {
+            JsObject(Seq(name → values))
+          }
         case (_, _) => JsObject(Seq(name -> toJsValue(value)))
       }
       case XNode(xs) => JsObject(mkFields(xs))
-      case XArray(elems) => JsArray(elems.map(toJsValue))
+      case XArray(elems) => JsArray(elems.map(x ⇒ toJsValue(x, true)))
     }
 
     def xValueToJsValue(xValue: XValue): JsValue = {
@@ -73,7 +80,7 @@ object Xml {
     buildNodes(xml) match {
       case List(x@XLeaf(_, _ :: _)) => toJsValue(x)
       case List(x) => play.api.libs.json.Json.obj(nameOf(xml.head) -> toJsValue(x))
-      case x => JsArray(x.map(toJsValue))
+      case x => JsArray(x.map(y ⇒ toJsValue(y, true)))
     }
 
   }
