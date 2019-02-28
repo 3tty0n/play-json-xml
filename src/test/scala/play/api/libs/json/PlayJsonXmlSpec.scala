@@ -13,22 +13,26 @@ class PlayJsonXmlSpec extends FlatSpec with Matchers {
     val xml =
       <fruits>
         <fruit>
-         <name>banana</name>
+          <name>banana</name>
           <price>1000</price>
           <season>true</season>
           <delicious>true</delicious>
         </fruit>
         <fruit>
-          <name>strowberry</name>
+          <name colour="red">strawberry</name>
           <price>3000</price>
           <season>false</season>
           <delicious>true</delicious>
         </fruit>
+        <fruit name="apple" price="500" seeds="yes">
+          <season>false</season>
+          <delicious>true</delicious>
+        </fruit>
+        <fruit price="5000" seeds="no" season="false" delicious="true">pineapple</fruit>
       </fruits>
 
-    val xmlNodeSeq: NodeSeq =
-      <fruits><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name>strowberry</name><price>3000</price><season>false</season><delicious>true</delicious></fruit></fruits>
-      .foldLeft(NodeSeq.Empty){ (a, b) => a ++ b }
+    val xmlNodeSeq: NodeSeq = <fruits><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name><value>strawberry</value><colour>red</colour></name><price>3000</price><season>false</season><delicious>true</delicious></fruit><fruit><name>apple</name><price>500</price><seeds>yes</seeds><season>false</season><delicious>true</delicious></fruit><fruit><value>pineapple</value><price>5000</price><seeds>no</seeds><season>false</season><delicious>true</delicious></fruit></fruits>
+      .foldLeft(NodeSeq.Empty) { (a, b) => a ++ b }
 
     val json = Json.parse(
       """
@@ -42,8 +46,25 @@ class PlayJsonXmlSpec extends FlatSpec with Matchers {
         |            "delicious":true
         |         },
         |         {
-        |            "name":"strowberry",
+        |            "name": {
+        |               "value": "strawberry",
+        |               "colour": "red"
+        |            },
         |            "price":3000,
+        |            "season":false,
+        |            "delicious":true
+        |         },
+        |         {
+        |            "name":"apple",
+        |            "price":500,
+        |            "seeds":"yes",
+        |            "season":false,
+        |            "delicious":true
+        |         },
+        |         {
+        |            "value":"pineapple",
+        |            "price":5000,
+        |            "seeds":"no",
         |            "season":false,
         |            "delicious":true
         |         }
