@@ -1,6 +1,7 @@
 # play-json-xml
 
-[![Build Status](https://travis-ci.org/3tty0n/play-json-xml.svg?branch=master)](https://travis-ci.org/3tty0n/play-json-xml) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.micchon/play-json-xml_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.micchon/play-json-xml_2.12)
+[![Build Status](https://travis-ci.org/3tty0n/play-json-xml.svg?branch=master)](https://travis-ci.org/3tty0n/play-json-xml) 
+[![Maven Central](https://img.shields.io/maven-central/v/org.micchon/play-json-xml_2.12.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.micchon%22%20AND%20a:%22play-json-xml_2.12%22)
 
 
 It converts between play-json and xml like json4s.
