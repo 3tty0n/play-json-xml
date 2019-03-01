@@ -20,7 +20,7 @@ If you want to convert xml to json,
 
 ```scala
 import play.api.libs.json.Xml
-import play.api.libs.json.implicits.JsonXmlImplicits._
+import play.api.libs.json.implicits._
 import play.api.libs.json.Json
 
 import scala.xml._
@@ -48,7 +48,7 @@ Or, if you want to convert json to xml,
 
 ```scala
 import play.api.libs.json.Xml
-import play.api.libs.json.implicits.JsonXmlImplicits._
+import play.api.libs.json.implicits._
 import play.api.libs.json.Json
 
 val json = Json.parse(
