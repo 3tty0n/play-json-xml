@@ -9,6 +9,7 @@ lazy val root = (project in file(".")).
     crossScalaVersions  := Scala212 :: Scala211 :: Nil,
     version             := "0.4.0",
     libraryDependencies ++= Seq(
+      "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.1",
       "org.scalatest" %% "scalatest" % "3.0.3" % Test
     ) ++ (
       CrossVersion.partialVersion(scalaVersion.value) match {
