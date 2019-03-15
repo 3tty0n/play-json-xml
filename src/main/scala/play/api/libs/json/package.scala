@@ -1,10 +1,9 @@
-package play.api.libs.json.implicits
-
-import play.api.libs.json.{JsValue, Xml}
+package play.api.libs.json
 
 import scala.xml.NodeSeq
 
-object JsonXmlImplicits {
+package object implicits {
+
   implicit class RichPlayJson(val xml: NodeSeq) {
     def toJson: JsValue = {
       Xml.toJson(xml)
@@ -16,4 +15,5 @@ object JsonXmlImplicits {
       Xml.toXml(json)
     }
   }
+
 }

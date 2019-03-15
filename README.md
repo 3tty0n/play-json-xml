@@ -1,16 +1,17 @@
 # play-json-xml
 
-[![Build Status](https://travis-ci.org/3tty0n/play-json-xml.svg?branch=master)](https://travis-ci.org/3tty0n/play-json-xml) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.micchon/play-json-xml_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.micchon/play-json-xml_2.12)
+[![Build Status](https://travis-ci.org/3tty0n/play-json-xml.svg?branch=master)](https://travis-ci.org/3tty0n/play-json-xml) 
+[![Maven Central](https://img.shields.io/maven-central/v/org.micchon/play-json-xml_2.12.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.micchon%22%20AND%20a:%22play-json-xml_2.12%22)
 
 
 It converts between play-json and xml like json4s.
 
 ## Install
 
-Builds are available for Scala 2.10.x, 2.11.x and for 2.12.x. The main line of development of play-json-xml is 2.12.4.
+Builds are available for Scala 2.11.x and for 2.12.x. The main line of development of play-json-xml is 2.12.4.
 
 ```scala
-libraryDependencies += "org.micchon" %% "play-json-xml" % "0.3.0"
+libraryDependencies += "org.micchon" %% "play-json-xml" % "0.4.0"
 ```
 
 ## Useage
@@ -19,7 +20,7 @@ If you want to convert xml to json,
 
 ```scala
 import play.api.libs.json.Xml
-import play.api.libs.json.implicits.JsonXmlImplicits._
+import play.api.libs.json.implicits._
 import play.api.libs.json.Json
 
 import scala.xml._
@@ -47,7 +48,7 @@ Or, if you want to convert json to xml,
 
 ```scala
 import play.api.libs.json.Xml
-import play.api.libs.json.implicits.JsonXmlImplicits._
+import play.api.libs.json.implicits._
 import play.api.libs.json.Json
 
 val json = Json.parse(

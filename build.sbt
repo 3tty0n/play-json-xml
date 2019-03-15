@@ -1,14 +1,13 @@
 lazy val Scala212 = "2.12.4"
 lazy val Scala211 = "2.11.11"
-lazy val Scala210 = "2.10.6"
 
 lazy val root = (project in file(".")).
   settings(
     name                := "play-json-xml",
     organization        := "org.micchon",
     scalaVersion        := Scala212,
-    crossScalaVersions  := Scala212 :: Scala211 :: Scala210 :: Nil,
-    version             := "0.3.3",
+    crossScalaVersions  := Scala212 :: Scala211 :: Nil,
+    version             := "0.4.1",
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "3.0.3" % Test
     ) ++ (
