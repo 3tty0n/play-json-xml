@@ -31,8 +31,8 @@ object Xml {
       case XLeaf((name, value), attrs) => (value, attrs) match {
         case (_, Nil) => toJsValue(value)
         case (XValue(""), xs) => JsObject(mkFields(xs))
-        case (XValue(a), _ :: _) =>
-          var values = JsObject(mkFields(("value" → value) +: attrs).toSeq)
+        case (XValue(_), _ :: _) =>
+          val values = JsObject(mkFields(("value" → value) +: attrs))
           if (flatten) {
             values
           } else {
@@ -41,7 +41,10 @@ object Xml {
         case (_, _) => JsObject(Seq(name -> toJsValue(value)))
       }
       case XNode(xs) => JsObject(mkFields(xs))
-      case XArray(elems) => JsArray(elems.map(x ⇒ toJsValue(x, true)))
+      case XArray(elems) => elems match {
+        case (_: XValue) :: _ => JsArray(elems.map(y ⇒ toJsValue(y)))
+        case _ => JsArray(elems.map(y ⇒ toJsValue(y, flatten=true)))
+      }
     }
 
     def xValueToJsValue(xValue: XValue): JsValue = {
@@ -80,7 +83,7 @@ object Xml {
     buildNodes(xml) match {
       case List(x@XLeaf(_, _ :: _)) => toJsValue(x)
       case List(x) => play.api.libs.json.Json.obj(nameOf(xml.head) -> toJsValue(x))
-      case x => JsArray(x.map(y ⇒ toJsValue(y, true)))
+      case x => JsArray(x.map(y ⇒ toJsValue(y, flatten=true)))
     }
 
   }
