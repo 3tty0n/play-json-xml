@@ -5,13 +5,18 @@ import play.api.libs.json.Xml.toXml
 import play.api.libs.json.implicits._
 import org.scalatest._
 import play.api.libs.json._
-import scala.xml.NodeSeq
+
+import scala.xml.{Elem, NodeSeq}
 
 class PlayJsonXmlSpec extends FlatSpec with Matchers {
 
   trait SetUp {
-    val xml =
+    val xml: Elem =
       <fruits>
+        <fruit>
+          <name>Aubergine</name>
+          <name>Eggplant</name>
+        </fruit>
         <fruit>
           <name>banana</name>
           <price>1000</price>
@@ -31,14 +36,17 @@ class PlayJsonXmlSpec extends FlatSpec with Matchers {
         <fruit price="5000" seeds="no" season="false" delicious="true">pineapple</fruit>
       </fruits>
 
-    val xmlNodeSeq: NodeSeq = <fruits><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name><value>strawberry</value><colour>red</colour></name><price>3000</price><season>false</season><delicious>true</delicious></fruit><fruit><name>apple</name><price>500</price><seeds>yes</seeds><season>false</season><delicious>true</delicious></fruit><fruit><value>pineapple</value><price>5000</price><seeds>no</seeds><season>false</season><delicious>true</delicious></fruit></fruits>
+    val xmlNodeSeq: NodeSeq = <fruits><fruit><name>Aubergine</name><name>Eggplant</name></fruit><fruit><name>banana</name><price>1000</price><season>true</season><delicious>true</delicious></fruit><fruit><name><value>strawberry</value><colour>red</colour></name><price>3000</price><season>false</season><delicious>true</delicious></fruit><fruit><name>apple</name><price>500</price><seeds>yes</seeds><season>false</season><delicious>true</delicious></fruit><fruit><value>pineapple</value><price>5000</price><seeds>no</seeds><season>false</season><delicious>true</delicious></fruit></fruits>
       .foldLeft(NodeSeq.Empty) { (a, b) => a ++ b }
 
-    val json = Json.parse(
+    val json: JsValue = Json.parse(
       """
         |{
         |   "fruits":{
         |      "fruit":[
+        |         {
+        |           "name": [ "Aubergine", "Eggplant"]
+        |         },
         |         {
         |            "name":"banana",
         |            "price":1000,
