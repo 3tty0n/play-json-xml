@@ -66,8 +66,11 @@ object Xml {
         if (isEmpty(n)) XLeaf((nameOf(n), XValue("")), buildAttrs(n)) :: Nil
         else if (isLeaf(n)) XLeaf((nameOf(n), XValue(n.text)), buildAttrs(n)) :: Nil
         else {
-          val children = directChildren(n)
-          XNode(buildAttrs(n) ::: children.map(nameOf).toList.zip(buildNodes(children))) :: Nil
+          val children = directChildren(n).map(cn ⇒ (nameOf(cn), buildNodes(cn).head))
+            .groupBy(_._1)
+            .map({ case (k,v) => (k,if (v.length > 1)  XArray(v.toList.map(_._2)) else v.head._2)})
+            .toList
+          XNode(buildAttrs(n) ::: children) :: Nil
         }
       case nodes: NodeSeq =>
         val allLabels = nodes.map(_.label)
