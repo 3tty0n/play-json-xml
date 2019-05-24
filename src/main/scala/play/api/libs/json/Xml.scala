@@ -57,7 +57,7 @@ object Xml {
 
     def mkFields(xs: List[(String, XElem)]): List[(String, JsValue)] =
       xs.flatMap { case (name, value) => (value, toJsValue(value)) match {
-        case (XLeaf(_, _ :: _), o: JsObject) => o.fields
+        case (XLeaf(_, _ :: _), o: JsObject) => Seq(name -> JsObject(o.fields))
         case (_, json) => Seq(name -> json)
       }}
 
