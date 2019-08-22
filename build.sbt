@@ -1,3 +1,4 @@
+lazy val Scala213 = "2.13.0"
 lazy val Scala212 = "2.12.4"
 lazy val Scala211 = "2.11.11"
 
@@ -6,15 +7,15 @@ lazy val root = (project in file(".")).
     name                := "play-json-xml",
     organization        := "org.micchon",
     scalaVersion        := Scala212,
-    crossScalaVersions  := Scala212 :: Scala211 :: Nil,
+    crossScalaVersions  := Scala213 :: Scala212 :: Scala211 :: Nil,
     version             := "0.4.3-SNAPSHOT",
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "3.0.3" % Test
+      "org.scalatest" %% "scalatest" % "3.0.8" % Test
     ) ++ (
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, scalaMajor)) if scalaMajor >= 12 =>
-          Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-              "com.typesafe.play" %% "play-json" % "2.7.1")
+          Seq("org.scala-lang.modules" %% "scala-xml" % "1.2.0",
+              "com.typesafe.play" %% "play-json" % "2.7.4")
         case Some((2, scalaMajor)) if scalaMajor >= 11 =>
           Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.6",
               "com.typesafe.play" %% "play-json" % "2.5.13")
