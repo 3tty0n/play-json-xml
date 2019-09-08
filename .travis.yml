@@ -1,13 +1,12 @@
 language: scala
-jdk: oraclejdk8
+jdk: openjdk11
 sudo: false
 cache:
   directories:
     - $HOME/.ivy2/cache
     - $HOME/.sbt
 scala:
-  - 2.10.6
-  - 2.11.11
   - 2.12.2
+  - 2.13.0
 script:
   - sbt test
