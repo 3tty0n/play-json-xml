@@ -7,7 +7,7 @@ lazy val root = (project in file(".")).
     organization        := "org.micchon",
     scalaVersion        := Scala212,
     crossScalaVersions  := Scala213 :: Scala212 :: Nil,
-    version             := "0.4.3-SNAPSHOT",
+    version             := "0.5.0",
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "3.0.8" % Test,
       "org.scala-lang.modules" %% "scala-xml" % "1.2.0",
